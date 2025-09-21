@@ -35,3 +35,8 @@ s.display();   // Output: 30 20 10
 cout << "Top: " << s.top() << endl; // 30
 s.pop();
 s.display();   // Output: 20 10
+
+
+---
+
+Would you like me to also create a **Linked List version README** (same attractive style) so your repo shows **both array-based and linked-list-based stack implementations**?
