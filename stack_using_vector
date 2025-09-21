@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Stack {
+    vector<int> v;  // vector as underlying container
+public:
+
+    // Push operation
+    void push(int val) {
+        v.push_back(val);
+    }
+
+    // Pop operation
+    void pop() {
+        if (v.empty()) {
+            cout << "Stack Underflow\n";
+            return;
+        }
+        v.pop_back();
+    }
+
+    // Top operation
+    int top() {
+        if (v.empty()) {
+            cout << "Stack is empty\n";
+            return -1; // or throw exception
+        }
+        return v.back();
+    }
+
+    // Size operation
+    int size() {
+        return v.size();
+    }
+
+    // Empty check
+    bool empty() {
+        return v.empty();
+    }
+
+    // Display elements (for understanding)
+    void display() {
+        if (v.empty()) {
+            cout << "Stack is empty\n";
+            return;
+        }
+        cout << "Stack elements (top to bottom): ";
+        for (int i = v.size() - 1; i >= 0; i--) {
+            cout << v[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Stack s;
+
+    s.push(10);
+    s.push(20);
+    s.push(30);
+
+    s.display(); // 30 20 10
+
+    cout << "Top element: " << s.top() << endl;   // 30
+    cout << "Size: " << s.size() << endl;         // 3
+
+    s.pop();
+    s.display();  // 20 10
+
+    cout << "Is empty? " << (s.empty() ? "Yes" : "No") << endl;
+
+    return 0;
+}
+
+
+Operation	Complexity
+Push	O(1)
+Pop	O(1)
+Top	O(1)
+Size	O(1)
+Empty	O(1)
