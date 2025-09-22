@@ -1,0 +1,67 @@
+📌 Trapping Rain Water — Two Pointer Approach
+🔹 Problem
+
+Given n non-negative integers representing an elevation map, compute how much water can be trapped after raining.
+
+✅ Optimized C++ Solution
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int left = 0, right = n - 1;   // two pointers
+        int leftMax = 0, rightMax = 0; // track max heights
+        int ans = 0;                   // total water trapped
+
+        while (left < right) {
+            // Update leftMax and rightMax
+            leftMax = max(leftMax, height[left]);
+            rightMax = max(rightMax, height[right]);
+
+            // The smaller boundary decides the trapped water
+            if (leftMax < rightMax) {
+                ans += leftMax - height[left];
+                left++;
+            } else {
+                ans += rightMax - height[right];
+                right--;
+            }
+        }
+        return ans;
+    }
+};
+
+// Driver Code (Optional)
+int main() {
+    vector<int> height = {4, 2, 0, 3, 2, 5};
+    Solution sol;
+    cout << "Total water trapped = " << sol.trap(height) << endl; 
+    // Output: 9
+    return 0;
+}
+
+🔹 Dry Run (height = [4, 2, 0, 3, 2, 5])
+Step	left	right	leftMax	rightMax	water        added    ans
+Init	  0	     5	   0	     0	      0	             0
+1      	0	     5	   4	     5	      0	             0
+2	      1	5	4	5	2 (4-2)	2
+3     	2	5	4	5	4 (4-0)	6
+4	      3	5	4	5	1 (4-3)	7
+5	      4	5	4	5	2 (4-2)	9
+End	left=5, right=5 → stop					9
+
+✅ Final Answer = 9
+
+🔹 Complexity
+
+Time: O(n) → single pass
+
+Space: O(1) → only variables
+
+✨ Key Idea
+
+Water at each position depends on the smaller boundary between left and right.
+
+Use two pointers with running leftMax and rightMax to avoid extra arrays.
