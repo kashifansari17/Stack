@@ -1,0 +1,76 @@
+🔹 Problem Statement (PSE)
+
+For each element in an array, find the nearest smaller element to its left.
+If no such element exists, return -1.
+
+🔹 Example
+Input: arr = [4, 5, 2, 10, 8]
+Output: [-1, 4, -1, 2, 2]
+
+Explanation:
+- For 4 → no left element → -1
+- For 5 → smaller on left = 4
+- For 2 → no smaller on left → -1
+- For 10 → smaller on left = 2
+- For 8 → smaller on left = 2
+
+🔹 Brute Force Approach
+
+For each element at index i, check all elements to the left (j = i-1, i-2, …, 0).
+
+Pick the first smaller element encountered.
+
+If none is found → -1.
+
+
+
+
+///////////////////////////////////////////🔹 C++ Brute Force Code////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> previousSmallerElement(vector<int>& arr) {
+    int n = arr.size();
+    vector<int> result(n, -1);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i - 1; j >= 0; j--) {
+            if (arr[j] < arr[i]) {
+                result[i] = arr[j];
+                break; // stop at first smaller element
+            }
+        }
+    }
+    return result;
+}
+
+int main() {
+    vector<int> arr = {4, 5, 2, 10, 8};
+    vector<int> ans = previousSmallerElement(arr);
+
+    for (int x : ans) cout << x << " ";
+    return 0;
+}
+
+🔹 Complexity
+
+Time: O(n²) (nested loops)
+
+Space: O(n) (result array)
+
+⚡ Note:
+Efficient solution uses a stack → O(n) time.
+
+
+
+
+
+
+///////////////////Optimal Approach  using stack o(N)///////////////////////////
+
+
+
+
